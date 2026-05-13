@@ -77,10 +77,19 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             className="bg-cream w-full max-w-2xl rounded-[40px] overflow-hidden shadow-2xl relative z-10 grid md:grid-cols-2"
           >
-            <div className="p-10 space-y-8">
-              <div className="space-y-2">
-                <h3 className="text-3xl font-serif text-forest">Contáctanos</h3>
-                <p className="text-forest/60 text-sm italic">Conecta con la naturaleza y la ciencia.</p>
+            <div className="p-10 space-y-8 flex flex-col">
+              <div className="flex items-center gap-6">
+                <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0">
+                  <img 
+                    src="/contacto_perfil.png" 
+                    alt="Ivonne Morales" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-3xl font-serif text-forest leading-none">Contáctanos</h3>
+                  <p className="text-forest/60 text-sm italic">Conecta con la naturaleza y la ciencia.</p>
+                </div>
               </div>
 
               <div className="space-y-4">
