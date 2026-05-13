@@ -16,9 +16,15 @@ import {
   Leaf,
   Globe,
   Droplets,
-  Bird
+  Bird,
+  Calendar,
+  MessageCircle,
+  QrCode,
+  Mail,
+  Phone
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 
 // Custom SVG Logo component for Ecoturismo México
 const EcoMexicoLogo = ({ className = "w-12 h-12", color = "currentColor" }: { className?: string, color?: string }) => (
@@ -44,7 +50,108 @@ const DynamicGraphic = ({ src, className = "" }: { src: string, className?: stri
   );
 };
 
-const Navbar = () => {
+// Custom component for Contact Modal
+const ContactModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+  const whatsappNumber = "525625790387";
+  const whatsappMessage = encodeURIComponent("¡Hola! Me interesa agendar una cita para conocer más sobre Silvestria Senderismo Comunitario.");
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+  const email = "silvestria.crc@outlook.com";
+  
+  // Outlook.com format for scheduling
+  const calendarUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent("Cita con Silvestria")}&body=${encodeURIComponent("Cita para conocer más sobre el senderismo comunitario de Silvestria.")}`;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-forest/80 backdrop-blur-md"
+          />
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            className="bg-cream w-full max-w-2xl rounded-[40px] overflow-hidden shadow-2xl relative z-10 grid md:grid-cols-2"
+          >
+            <div className="p-10 space-y-8">
+              <div className="space-y-2">
+                <h3 className="text-3xl font-serif text-forest">Contáctanos</h3>
+                <p className="text-forest/60 text-sm italic">Conecta con la naturaleza y la ciencia.</p>
+              </div>
+
+              <div className="space-y-4">
+                <a 
+                  href={whatsappUrl} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex items-center gap-4 p-4 bg-emerald-50 text-emerald-700 rounded-2xl hover:bg-emerald-100 transition-colors group"
+                >
+                  <div className="bg-emerald-500 text-white p-3 rounded-xl group-hover:scale-110 transition-transform">
+                    <MessageCircle className="w-6 h-6" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold">WhatsApp Directo</span>
+                    <span className="text-xs opacity-70">Chatea con nosotros ahora</span>
+                  </div>
+                </a>
+
+                <a 
+                  href={calendarUrl}
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="flex items-center gap-4 p-4 bg-sepia/5 text-sepia rounded-2xl hover:bg-sepia/10 transition-colors group"
+                >
+                  <div className="bg-sepia text-sand p-3 rounded-xl group-hover:scale-110 transition-transform">
+                    <Calendar className="w-6 h-6" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold">Agendar Cita</span>
+                    <span className="text-xs opacity-70">Sincroniza con tu calendario</span>
+                  </div>
+                </a>
+
+                <a 
+                  href={`mailto:${email}?subject=Interés en Silvestria&body=Hola Ivonne, me gustaría agendar una cita para...`}
+                  className="flex items-center gap-4 p-4 bg-forest/5 text-forest rounded-2xl hover:bg-forest/10 transition-colors group"
+                >
+                  <div className="bg-forest text-sand p-3 rounded-xl group-hover:scale-110 transition-transform">
+                    <Mail className="w-6 h-6" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-bold">Enviar Correo</span>
+                    <span className="text-xs opacity-70">{email}</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-forest p-10 flex flex-col items-center justify-center text-center text-sand space-y-6">
+              <div className="bg-white p-4 rounded-3xl shadow-2xl">
+                <QRCodeSVG value={whatsappUrl} size={180} />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm font-bold uppercase tracking-widest text-emerald-400">Escanea el Código QR</p>
+                <p className="text-xs text-sand/60 max-w-[200px] mx-auto">Abre WhatsApp en tu teléfono y escanea para chatear instantáneamente.</p>
+              </div>
+              <button 
+                onClick={onClose}
+                className="text-[10px] uppercase tracking-[0.2em] font-bold border-b border-sand/30 pb-1 hover:text-emerald-400 transition-colors"
+              >
+                Cerrar ventana
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -89,7 +196,10 @@ const Navbar = () => {
             Expediciones
             <span className="absolute -bottom-1 left-0 w-0 h-px bg-sepia group-hover:w-full transition-all duration-300"></span>
           </a>
-          <button className="bg-forest text-sand px-8 py-3 rounded-full hover:bg-sepia transition-all hover:shadow-2xl hover:shadow-sepia/20 flex items-center gap-3 font-sans">
+          <button 
+            onClick={onContactClick}
+            className="bg-forest text-sand px-8 py-3 rounded-full hover:bg-sepia transition-all hover:shadow-2xl hover:shadow-sepia/20 flex items-center gap-3 font-sans"
+          >
             Contactar
             <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div>
           </button>
@@ -301,10 +411,16 @@ const ProfileSection = () => {
             </div>
           </div>
           <div className="flex gap-4">
-            <a href="mailto:ivonnemorales23@ciencias.unam.mx" className="bg-sepia text-sand px-8 py-4 rounded-full font-bold hover:bg-forest transition-all shadow-lg flex items-center gap-3 font-sans">
+            <button 
+              onClick={() => {
+                const modalEvent = new CustomEvent('openContactModal');
+                window.dispatchEvent(modalEvent);
+              }}
+              className="bg-sepia text-sand px-8 py-4 rounded-full font-bold hover:bg-forest transition-all shadow-lg flex items-center gap-3 font-sans"
+            >
               Contactar por Email
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -437,7 +553,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Droplets className="w-5 h-5 shrink-0 text-sepia" />
-                <a href="mailto:ivonnemorales23@ciencias.unam.mx" className="hover:text-sand break-all">ivonnemorales23@ciencias.unam.mx</a>
+                <a href="mailto:silvestria.crc@outlook.com" className="hover:text-sand break-all">silvestria.crc@outlook.com</a>
               </li>
               <li className="flex items-center gap-3">
                 <Leaf className="w-5 h-5 shrink-0 text-sepia" />
@@ -464,9 +580,18 @@ const Footer = () => {
 };
 
 export default function App() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOpenModal = () => setIsContactModalOpen(true);
+    window.addEventListener('openContactModal', handleOpenModal);
+    return () => window.removeEventListener('openContactModal', handleOpenModal);
+  }, []);
+
   return (
     <main className="bg-cream selection:bg-sepia selection:text-sand">
-      <Navbar />
+      <Navbar onContactClick={() => setIsContactModalOpen(true)} />
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
       <Hero />
       
       {/* Dynamic Ticker */}
@@ -546,13 +671,16 @@ export default function App() {
             </p>
             
             <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-              <a 
-                href="mailto:ivonnemorales23@ciencias.unam.mx"
+              <button 
+                onClick={() => {
+                  const modalEvent = new CustomEvent('openContactModal');
+                  window.dispatchEvent(modalEvent);
+                }}
                 className="bg-sand text-sepia px-12 py-5 rounded-full font-bold flex items-center gap-3 hover:bg-white transition-all shadow-2xl active:scale-95 font-sans"
               >
-                ivonnemorales23@ciencias.unam.mx
+                silvestria.crc@outlook.com
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </button>
               <div className="flex items-center gap-4 text-sand/60 text-xs font-bold uppercase tracking-widest font-sans">
                 <span>WhatsApp:</span>
                 <span className="text-sand">+52 56 2579 0387</span>
