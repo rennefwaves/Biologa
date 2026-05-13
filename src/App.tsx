@@ -75,11 +75,11 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="bg-cream w-full max-w-2xl rounded-[40px] overflow-hidden shadow-2xl relative z-10 grid md:grid-cols-2"
+            className="bg-cream w-full max-w-2xl rounded-[40px] overflow-hidden shadow-2xl relative z-10 grid md:grid-cols-2 max-h-[90vh] overflow-y-auto"
           >
-            <div className="p-10 space-y-8 flex flex-col">
-              <div className="flex items-center gap-6">
-                <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0">
+            <div className="p-6 md:p-10 space-y-8 flex flex-col">
+              <div className="flex items-center gap-4 md:gap-6">
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0">
                   <img 
                     src="/contacto_perfil.png" 
                     alt="Ivonne Morales" 
@@ -87,8 +87,8 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
                   />
                 </div>
                 <div className="space-y-1">
-                  <h3 className="text-3xl font-serif text-forest leading-none">Contáctanos</h3>
-                  <p className="text-forest/60 text-sm italic">Conecta con la naturaleza y la ciencia.</p>
+                  <h3 className="text-2xl md:text-3xl font-serif text-forest leading-none">Contáctanos</h3>
+                  <p className="text-forest/60 text-xs md:text-sm italic">Conecta con la naturaleza y la ciencia.</p>
                 </div>
               </div>
 
@@ -138,11 +138,11 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
               </div>
             </div>
 
-            <div className="bg-forest p-10 flex flex-col items-center justify-center text-center text-sand space-y-6">
-              <div className="bg-white p-4 rounded-3xl shadow-2xl">
+            <div className="bg-forest p-8 md:p-10 flex flex-col items-center justify-center text-center text-sand space-y-6">
+              <div className="bg-white p-4 rounded-3xl shadow-2xl hidden md:block">
                 <QRCodeSVG value={whatsappUrl} size={180} />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 hidden md:block">
                 <p className="text-sm font-bold uppercase tracking-widest text-emerald-400">Escanea el Código QR</p>
                 <p className="text-xs text-sand/60 max-w-[200px] mx-auto">Abre WhatsApp en tu teléfono y escanea para chatear instantáneamente.</p>
               </div>
@@ -171,10 +171,10 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-cream/95 backdrop-blur-xl py-4 shadow-xl shadow-forest/5' : 'bg-transparent py-8'}`}>
-      <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-        <div className="flex items-center gap-4 group cursor-pointer">
-          <div className="w-32 h-32 relative flex items-center justify-center">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-cream/95 backdrop-blur-xl py-2 md:py-4 shadow-xl shadow-forest/5' : 'bg-transparent py-4 md:py-8'}`}>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center">
+        <div className="flex items-center gap-2 md:gap-4 group cursor-pointer">
+          <div className="w-16 h-16 md:w-24 md:h-24 relative flex items-center justify-center">
             <img 
               src="/1.png" 
               alt="Silvestria Logo" 
@@ -183,8 +183,8 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
             />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="font-serif text-3xl font-bold tracking-tight text-forest uppercase">Silvestria</span>
-            <span className="text-[12px] uppercase tracking-[0.4em] text-sepia font-bold ml-1">Senderismo Comunitario</span>
+            <span className="font-serif text-xl md:text-3xl font-bold tracking-tight text-forest uppercase">Silvestria</span>
+            <span className="text-[8px] md:text-[12px] uppercase tracking-[0.4em] text-sepia font-bold ml-1">Senderismo Comunitario</span>
           </div>
         </div>
         
@@ -267,15 +267,15 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sand/10 border border-sand/20 text-sand text-[10px] font-bold uppercase tracking-[0.3em] mb-10 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-sand/10 border border-sand/20 text-sand text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-6 md:mb-10 backdrop-blur-md">
               <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
               Conservación • Ciencia • Senderismo Comunitario
             </div>
-            <h1 className="text-7xl lg:text-9xl text-sand font-serif leading-[0.85] mb-10 tracking-tight uppercase">
+            <h1 className="text-5xl md:text-7xl lg:text-9xl text-sand font-serif leading-[0.85] mb-8 md:mb-10 tracking-tight uppercase">
               Silvestria <br />
-              <span className="italic font-extralight text-sand/60 text-5xl md:text-7xl lowercase tracking-tighter italic">"Senderismo Comunitario"</span>
+              <span className="italic font-extralight text-sand/60 text-3xl md:text-5xl lg:text-7xl lowercase tracking-tighter italic">"Senderismo Comunitario"</span>
             </h1>
-            <p className="text-sand/80 text-lg md:text-2xl max-w-2xl mb-12 leading-relaxed font-light">
+            <p className="text-sand/80 text-base md:text-2xl max-w-2xl mb-10 md:mb-12 leading-relaxed font-light">
               Liderado por la <span className="text-white font-medium italic underline decoration-sepia/50 underline-offset-4">Biol. Ivonne Morales Muñoz</span>, reconocida por su labor en el Suelo de Conservación de la CDMX y el desarrollo de proyectos de restauración y educación ambiental. Transformamos la ciencia en desarrollo sostenible local.
             </p>
             <div className="flex flex-wrap gap-6 items-center">
@@ -366,9 +366,9 @@ const ProfileSection = () => {
   return (
     <section id="biologa" className="py-32 bg-sand relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-24 items-center">
-        <div className="relative group">
+        <div className="relative group max-w-md mx-auto lg:max-w-none">
           <div className="absolute -inset-4 bg-sepia/5 rounded-[60px] blur-3xl transform rotate-3 scale-95 group-hover:rotate-0 transition-transform duration-1000"></div>
-          <div className="relative aspect-[3/4] rounded-[50px] overflow-hidden shadow-2xl border-8 border-cream group-hover:shadow-forest/20 transition-shadow">
+          <div className="relative aspect-[3/4] rounded-[50px] overflow-hidden shadow-2xl border-4 md:border-8 border-cream group-hover:shadow-forest/20 transition-shadow">
             <img 
               src="/biologa_perfil.png" 
               alt="Biol. Ivonne Morales Muñoz - Senderismo Comunitario" 
@@ -377,18 +377,18 @@ const ProfileSection = () => {
             />
             {/* Overlay for branding */}
             <div className="absolute inset-0 bg-gradient-to-t from-forest/40 to-transparent"></div>
-            <div className="absolute bottom-8 left-8 right-8">
-              <div className="bg-sand/90 backdrop-blur-md p-4 rounded-2xl border border-sand/50 shadow-xl">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-sepia mb-1">Especialidad</p>
-                <p className="text-xl font-serif text-forest italic">Senderismo Comunitario</p>
+            <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8">
+              <div className="bg-sand/90 backdrop-blur-md p-3 md:p-4 rounded-xl md:rounded-2xl border border-sand/50 shadow-xl">
+                <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-sepia mb-1">Especialidad</p>
+                <p className="text-lg md:text-xl font-serif text-forest italic">Senderismo Comunitario</p>
               </div>
             </div>
           </div>
           {/* Badge */}
-          <div className="absolute -bottom-10 -right-10 bg-forest p-10 rounded-full shadow-2xl flex flex-col items-center justify-center text-sand border-4 border-sand">
-            <EcoMexicoLogo color="#F5F2ED" className="w-10 h-10 mb-2" />
-            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">CIENCIAS UNAM</span>
-            <span className="text-[10px] font-bold uppercase tracking-widest">Bióloga</span>
+          <div className="absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 bg-forest p-6 md:p-10 rounded-full shadow-2xl flex flex-col items-center justify-center text-sand border-4 border-sand scale-75 md:scale-100 z-10">
+            <EcoMexicoLogo color="#F5F2ED" className="w-6 h-6 md:w-10 md:h-10 mb-2" />
+            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-emerald-400">CIENCIAS UNAM</span>
+            <span className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Bióloga</span>
           </div>
         </div>
 
@@ -398,9 +398,9 @@ const ProfileSection = () => {
               <div className="w-10 h-px bg-sepia"></div>
               <span className="text-xs font-bold uppercase tracking-[0.3em]">Perfil Profesional</span>
             </div>
-            <h2 className="text-5xl lg:text-7xl font-serif text-forest leading-[1.1]">
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-serif text-forest leading-[1.1]">
               Ivonne del Carmen <br />
-              <span className="italic font-light text-4xl text-sepia">Morales Muñoz</span>
+              <span className="italic font-light text-2xl md:text-4xl text-sepia">Morales Muñoz</span>
             </h2>
             <p className="text-forest text-sm font-bold uppercase tracking-widest italic">Bióloga por la Facultad de Ciencias, UNAM</p>
           </div>
@@ -438,9 +438,9 @@ const ProfileSection = () => {
 };
 
 const ExpeditionCard = ({ title, location, type, img }: { title: string, location: string, type: string, img: string }) => (
-  <motion.div 
+    <motion.div 
     whileHover={{ y: -15 }}
-    className="group relative h-[600px] rounded-[50px] overflow-hidden cursor-pointer"
+    className="group relative h-[400px] md:h-[600px] rounded-[30px] md:rounded-[50px] overflow-hidden cursor-pointer"
   >
     <img 
       src={img} 
@@ -449,19 +449,19 @@ const ExpeditionCard = ({ title, location, type, img }: { title: string, locatio
       referrerPolicy="no-referrer"
     />
     <div className="absolute inset-0 bg-gradient-to-t from-forest via-forest/20 to-transparent"></div>
-    <div className="absolute bottom-0 left-0 p-12 w-full translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-      <div className="flex items-center gap-3 text-sand/60 text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+    <div className="absolute bottom-0 left-0 p-6 md:p-12 w-full translate-y-4 md:translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+      <div className="flex items-center gap-3 text-sand/60 text-[8px] md:text-[10px] font-bold uppercase tracking-[0.3em] mb-2 md:mb-4">
         <MapPin className="w-3 h-3" />
         {location}
       </div>
-      <h3 className="text-4xl font-serif text-sand mb-6">{title}</h3>
+      <h3 className="text-2xl md:text-4xl font-serif text-sand mb-4 md:mb-6">{title}</h3>
       <div className="flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-        <div className="flex gap-3">
-          <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold text-sand uppercase tracking-widest border border-white/10">{type}</span>
-          <span className="px-3 py-1 bg-emerald-500 rounded-full text-[10px] font-bold text-sand uppercase tracking-widest">En Reserva</span>
+        <div className="flex gap-2 md:gap-3 flex-wrap">
+          <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[8px] md:text-[10px] font-bold text-sand uppercase tracking-widest border border-white/10">{type}</span>
+          <span className="px-3 py-1 bg-emerald-500 rounded-full text-[8px] md:text-[10px] font-bold text-sand uppercase tracking-widest">En Reserva</span>
         </div>
-        <div className="bg-sand text-forest p-3 rounded-full hover:scale-110 transition-transform">
-          <ArrowRight className="w-5 h-5" />
+        <div className="bg-sand text-forest p-2 md:p-3 rounded-full hover:scale-110 transition-transform">
+          <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
         </div>
       </div>
     </div>
@@ -517,10 +517,10 @@ const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-20 mb-24">
           <div className="lg:col-span-2 space-y-10">
-            <div className="flex items-center gap-6">
-              <div className="w-48 h-48 relative flex items-center justify-center">
+            <div className="flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-6 text-center md:text-left">
+              <div className="w-32 h-32 md:w-48 md:h-48 relative flex items-center justify-center">
                 <img 
                   src="/1.png" 
                   alt="Silvestria Logo" 
@@ -529,11 +529,11 @@ const Footer = () => {
                 />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="font-serif text-5xl font-bold tracking-tight uppercase">SILVESTRIA</span>
-                <span className="text-sm uppercase tracking-[0.5em] text-sepia font-bold ml-1 text-emerald-400">Senderismo Comunitario</span>
+                <span className="font-serif text-3xl md:text-5xl font-bold tracking-tight uppercase">SILVESTRIA</span>
+                <span className="text-[10px] md:text-sm uppercase tracking-[0.5em] text-sepia font-bold mt-2 md:ml-1 text-emerald-400">Senderismo Comunitario</span>
               </div>
             </div>
-            <p className="text-lg text-sand/50 max-w-md font-light italic leading-relaxed">
+            <p className="text-base md:text-lg text-sand/50 max-w-md font-light italic leading-relaxed text-center md:text-left mx-auto md:mx-0">
               Plataforma dedicada a la conservación de la biodiversidad mexicana a través del turismo científico. Liderado por Ivonne Morales Muñoz.
             </p>
             <div className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-sand/30">
@@ -671,9 +671,9 @@ export default function App() {
             <div className="w-20 h-20 bg-sand/10 rounded-full flex items-center justify-center mx-auto mb-10 backdrop-blur-md border border-sand/20 text-sand">
               <TreePine className="w-8 h-8" />
             </div>
-            <h2 className="text-5xl md:text-7xl font-serif mb-10 leading-tight">
+            <h2 className="text-4xl md:text-7xl font-serif mb-10 leading-tight">
               ¿Listo para ser parte <br />
-              <span className="italic font-light text-sand/60 text-4xl md:text-6xl">del cambio biológico?</span>
+              <span className="italic font-light text-sand/60 text-2xl md:text-6xl">del cambio biológico?</span>
             </h2>
             <p className="text-xl opacity-70 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
               Contacta directamente a la Biol. Ivonne Morales para expediciones personalizadas o consultoría en conservación.
