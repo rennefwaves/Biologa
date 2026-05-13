@@ -79,11 +79,12 @@ const ContactModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
           >
             <div className="p-6 md:p-10 space-y-8 flex flex-col">
               <div className="flex items-center gap-4 md:gap-6">
-                <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0">
+                <div className="w-16 h-16 md:w-24 md:h-24 rounded-2xl overflow-hidden shadow-lg border-4 border-white shrink-0 bg-white">
                   <img 
-                    src="/contacto_perfil.png" 
+                    src="/contacto_perfil.png?v=2" 
                     alt="Ivonne Morales" 
                     className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="space-y-1">
@@ -178,7 +179,8 @@ const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
             <img 
               src="/1.png" 
               alt="Silvestria Logo" 
-              className="w-full h-full object-contain mix-blend-multiply group-hover:rotate-6 transition-transform"
+              className="w-full h-full object-contain group-hover:rotate-6 transition-transform"
+              referrerPolicy="no-referrer"
               onError={(e) => (e.currentTarget.style.display = 'none')}
             />
           </div>
@@ -524,7 +526,8 @@ const Footer = () => {
                 <img 
                   src="/1.png" 
                   alt="Silvestria Logo" 
-                  className="w-full h-full object-contain mix-blend-multiply"
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
                   onError={(e) => (e.currentTarget.style.display = 'none')}
                 />
               </div>
