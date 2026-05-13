@@ -30,6 +30,20 @@ const EcoMexicoLogo = ({ className = "w-12 h-12", color = "currentColor" }: { cl
   </svg>
 );
 
+// Custom component for the new graphics with background removal
+const DynamicGraphic = ({ src, className = "" }: { src: string, className?: string }) => {
+  return (
+    <div className={`overflow-hidden flex items-center justify-center h-[200px] ${className}`}>
+      <img 
+        src={src} 
+        alt="Graphic" 
+        className="w-full h-full object-contain mix-blend-multiply transition-transform duration-700 hover:scale-110"
+        referrerPolicy="no-referrer"
+      />
+    </div>
+  );
+};
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -44,12 +58,17 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-cream/95 backdrop-blur-xl py-4 shadow-xl shadow-forest/5' : 'bg-transparent py-8'}`}>
       <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
         <div className="flex items-center gap-4 group cursor-pointer">
-          <div className="bg-sepia text-sand p-2 rounded-xl group-hover:rotate-6 transition-transform">
-            <EcoMexicoLogo className="w-8 h-8" />
+          <div className="w-20 h-20 relative flex items-center justify-center">
+            <img 
+              src="/1.png" 
+              alt="Silvestria Logo" 
+              className="w-full h-full object-contain mix-blend-multiply group-hover:rotate-6 transition-transform"
+              onError={(e) => (e.currentTarget.style.display = 'none')}
+            />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="font-serif text-2xl font-bold tracking-tight text-forest uppercase">Senderismo</span>
-            <span className="text-[10px] uppercase tracking-[0.4em] text-sepia font-bold ml-1">Comunitario</span>
+            <span className="font-serif text-2xl font-bold tracking-tight text-forest uppercase">Silvestria</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] text-sepia font-bold ml-1">Senderismo Comunitario</span>
           </div>
         </div>
         
@@ -133,9 +152,9 @@ const Hero = () => {
               <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
               Conservación • Ciencia • Senderismo Comunitario
             </div>
-            <h1 className="text-7xl lg:text-9xl text-sand font-serif leading-[0.85] mb-10 tracking-tight">
-              Senderismo <br />
-              <span className="italic font-extralight text-sand/60">Comunitario.</span>
+            <h1 className="text-7xl lg:text-9xl text-sand font-serif leading-[0.85] mb-10 tracking-tight uppercase">
+              Silvestria <br />
+              <span className="italic font-extralight text-sand/60 text-5xl md:text-7xl lowercase tracking-tighter italic">"Senderismo Comunitario"</span>
             </h1>
             <p className="text-sand/80 text-lg md:text-2xl max-w-2xl mb-12 leading-relaxed font-light">
               Liderado por la <span className="text-white font-medium italic underline decoration-sepia/50 underline-offset-4">Biol. Ivonne Morales Muñoz</span>, reconocida por su labor en el Suelo de Conservación de la CDMX y el desarrollo de proyectos de restauración y educación ambiental. Transformamos la ciencia en desarrollo sostenible local.
@@ -163,9 +182,9 @@ const Hero = () => {
 
 const StrategicPlan = () => {
   return (
-    <section id="mision" className="py-32 bg-forest relative overflow-hidden">
+    <section id="mision" className="py-32 bg-cream relative overflow-hidden">
       <div className="absolute top-0 right-0 p-24 opacity-[0.03] scale-[3] pointer-events-none">
-        <EcoMexicoLogo color="white" />
+        <EcoMexicoLogo color="forest" />
       </div>
       <div className="max-w-7xl mx-auto px-8 relative z-10">
         <div className="grid lg:grid-cols-3 gap-16">
@@ -173,13 +192,14 @@ const StrategicPlan = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 text-center lg:text-left"
           >
-            <div className="flex items-center gap-4 text-emerald-400">
+           <DynamicGraphic src="/2.png" className="mb-4" />
+            <div className="flex items-center justify-center lg:justify-start gap-4 text-sepia">
               <TreePine className="w-10 h-10" />
-              <h3 className="text-3xl font-serif text-sand">Misión</h3>
+              <h3 className="text-3xl font-serif text-forest">Misión</h3>
             </div>
-            <p className="text-sand/70 text-lg leading-relaxed font-light italic">
+            <p className="text-forest/70 text-lg leading-relaxed font-light italic">
               "Fomentar una cultura de respeto hacia los ecosistemas mexicanos mediante el senderismo comunitario, integrando el conocimiento técnico para generar un impacto social y ambiental positivo."
             </p>
           </motion.div>
@@ -189,13 +209,14 @@ const StrategicPlan = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 text-center lg:text-left"
           >
-            <div className="flex items-center gap-4 text-emerald-400">
+            <DynamicGraphic src="/3.png" className="mb-4" />
+            <div className="flex items-center justify-center lg:justify-start gap-4 text-sepia">
               <Globe className="w-10 h-10" />
-              <h3 className="text-3xl font-serif text-sand">Visión</h3>
+              <h3 className="text-3xl font-serif text-forest">Visión</h3>
             </div>
-            <p className="text-sand/70 text-lg leading-relaxed font-light italic">
+            <p className="text-forest/70 text-lg leading-relaxed font-light italic">
               "Ser el puente líder entre el conocimiento biológico científico de la UNAM y la gestión gubernamental, transformando el ecoturismo en un motor de regeneración ambiental en México."
             </p>
           </motion.div>
@@ -205,13 +226,14 @@ const StrategicPlan = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 text-center lg:text-left"
           >
-            <div className="flex items-center gap-4 text-emerald-400">
+            <DynamicGraphic src="/4.png" className="mb-4" />
+            <div className="flex items-center justify-center lg:justify-start gap-4 text-sepia">
               <ShieldCheck className="w-10 h-10" />
-              <h3 className="text-3xl font-serif text-sand">Objetivo</h3>
+              <h3 className="text-3xl font-serif text-forest">Objetivo</h3>
             </div>
-            <p className="text-sand/70 text-lg leading-relaxed font-light italic">
+            <p className="text-forest/70 text-lg leading-relaxed font-light italic">
               "Garantizar la preservación de recursos naturales mediante la implementación de ecotecnias, monitoreo biológico y educación ambiental con rigor técnico y normativo."
             </p>
           </motion.div>
@@ -373,10 +395,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-24">
           <div className="lg:col-span-2 space-y-10">
             <div className="flex items-center gap-4">
-              <EcoMexicoLogo className="w-12 h-12 text-sepia" />
+              <div className="w-28 h-28 relative flex items-center justify-center">
+                <img 
+                  src="/1.png" 
+                  alt="Silvestria Logo" 
+                  className="w-full h-full object-contain mix-blend-multiply"
+                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                />
+              </div>
               <div className="flex flex-col leading-none">
-                <span className="font-serif text-4xl font-bold tracking-tight uppercase">SENDERISMO</span>
-                <span className="text-xs uppercase tracking-[0.5em] text-sepia font-bold ml-1 text-emerald-400">Comunitario</span>
+                <span className="font-serif text-4xl font-bold tracking-tight uppercase">SILVESTRIA</span>
+                <span className="text-xs uppercase tracking-[0.5em] text-sepia font-bold ml-1 text-emerald-400">Senderismo Comunitario</span>
               </div>
             </div>
             <p className="text-lg text-sand/50 max-w-md font-light italic leading-relaxed">
@@ -420,7 +449,7 @@ const Footer = () => {
 
         <div className="pt-12 border-t border-sand/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-sand/20">
           <div className="flex gap-8">
-            <span>© 2026 Senderismo Comunitario</span>
+            <span>© 2026 Silvestria - Senderismo Comunitario</span>
             <span>Conservación & Biodiversidad</span>
           </div>
           <div className="flex gap-8">
@@ -447,6 +476,8 @@ export default function App() {
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           className="flex gap-24 items-center text-[10px] font-bold uppercase tracking-[0.5em]"
         >
+          <span>Silvestria</span>
+          <div className="w-1.5 h-1.5 bg-sand/30 rounded-full"></div>
           <span>Senderismo Comunitario</span>
           <div className="w-1.5 h-1.5 bg-sand/30 rounded-full"></div>
           <span>Biol. Ivonne Morales Muñoz</span>
